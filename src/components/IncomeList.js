@@ -7,14 +7,10 @@ export default function IncomeList() {
 
 const {incomes} = useContext(FirebaseContext)
 
-const sortByDate = (a,b) => {
-    return a.date - b.date
-}
-
     return (
         <div className='income-list'>
             {
-                incomes.sort(sortByDate).map((income,index) =>(
+                incomes.map((income,index) =>(
                     <IncomeItem
                     key = {index}
                     income={income}

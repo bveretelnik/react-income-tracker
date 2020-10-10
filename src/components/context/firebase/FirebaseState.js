@@ -35,6 +35,7 @@ const fetchIncomes = async () => {
 }
 
 const addIncom = async (desc,price,date) => {
+
     const income = {
         desc,
         price,
