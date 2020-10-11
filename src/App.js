@@ -1,4 +1,5 @@
 import React from 'react';
+import AlertState from './components/context/alert/AlertState';
 import FirebaseState from './components/context/firebase/FirebaseState';
 import Header from './components/Header';
 import IncomeForm from './components/IncomeForm';
@@ -7,10 +8,12 @@ function App() {
  
   return ( 
     <FirebaseState>
-      <div className="App">
-          <Header />
-          <IncomeForm/>
-      </div>
+      <AlertState>
+        <div className="App">
+            <Header />
+            <IncomeForm/>
+        </div>
+        </AlertState>
     </FirebaseState>
   );
 }

@@ -2,10 +2,14 @@ import React, {useState,useContext, Fragment,useEffect} from 'react'
 import { FirebaseContext } from './context/firebase/firebaseContext';
 import Loader from './Loader'
 import IncomeList from './IncomeList'
+import { AlertContext } from './context/alert/alertContext';
+import Alert from './Alert'
 
 export default function IncomeForm() {
     
     const {addIncom,incomes,fetchIncomes, loading} = useContext(FirebaseContext)
+
+    const {show,hide,alert} = useContext(AlertContext)
 
     const [desc,stateDesc] = useState('');
     const [date,stateDate] = useState('');
@@ -14,13 +18,17 @@ export default function IncomeForm() {
 
     const AddIncome = e => {
         e.preventDefault()
-
-        // let d = date.current.value.split('-')
-        // let newD = new Date(d[0],d[1]-1,d[2])
         
         addIncom(desc,price,date)
 
         console.log(incomes);
+
+        show()
+
+        setTimeout(() => {
+            hide()
+        }, 1000);
+
         stateDesc('')
         stateDate('')
         statePrice('') 
@@ -41,6 +49,9 @@ export default function IncomeForm() {
                 <input type="submit" value="Add Income" />
             </div>
         </form>
+                {alert.visible
+                ?<Alert/>
+                : ''}
             {loading
             ? <Loader/>
             : <IncomeList/>
