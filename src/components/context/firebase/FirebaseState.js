@@ -21,16 +21,30 @@ const showLoader = () => dispatch({type:SHOW_LOADER})
 const fetchIncomes = async () => {
     showLoader()
     const res = await Axios.get(`${url}/incomes.json`)
-    
     const payload = Object.keys(res.data).map(key =>{
         return {
             ...res.data[key],
             id:key
         }
     })
+
+    let incomes = Object.values(payload);
+
+    incomes = incomes.sort((prev, current) => {
+        if(prev.date < current.date) {
+            return -1;
+        } else if (prev.date > current.date) {
+            return 1;
+
+        } else {
+            return 0;
+
+        }
+    })
+
     dispatch({
         type:FETCH_INCOME,
-        payload
+        payload: incomes
     })
 }
 

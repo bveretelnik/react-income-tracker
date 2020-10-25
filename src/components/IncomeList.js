@@ -5,7 +5,6 @@ import { FirebaseContext } from './context/firebase/firebaseContext';
 export default function IncomeList() {
 
 const {incomes, removeIncome} = useContext(FirebaseContext)
-
 // const sortByDate = (a, b) => {
 //     return a.date - b.date;
 //   }
